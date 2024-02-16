@@ -1,2 +1,2 @@
-# CSCI3300-Grocery-Delivery-Service
-A web-based application for buying groceries 
+# CSCI3300-MyRegistry-Project
+A web-based registry application. 
