@@ -1,0 +1,45 @@
+{% extends 'account_app/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-8">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Sign In</h2>
+                    <form method="post" action="{% url 'signin' %}">
+                        {% csrf_token %}
+                        <div class="mb-3 row">
+                            <div class="col">
+                                <input type="text" name="{{ form.username.name }}" class="form-control" placeholder="{{ form.username.label }}">
+                                {% if form.username.errors %}
+                                    <small class="text-danger">{{ form.username.errors }}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col">
+                                <input type="password" name="{{ form.password.name }}" class="form-control" placeholder="{{ form.password.label }}">
+                                {% if form.password.errors %}
+                                    <small class="text-danger">{{ form.password.errors }}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% if form.non_field_errors %}
+                            <div class="mb-3 row">
+                                <div class="col">
+                                    <small class="text-danger">{{ form.non_field_errors }}</small>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Don't have an account? <a href="{% url 'create_account' %}">Create Account</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
