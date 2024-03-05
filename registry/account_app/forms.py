@@ -6,14 +6,17 @@ from django.utils.translation import gettext as _
 from .models import UserProfile
 
 class CreateAccountForm(forms.ModelForm):
+    # Define password fields and registry_type choice field
     password1 = forms.CharField(label=_('Password'), widget=forms.PasswordInput)
     password2 = forms.CharField(label=_('Confirm Password'), widget=forms.PasswordInput)
     registry_type = forms.ChoiceField(label=_('Registry Type'), choices=[('gift', _('Gift Registry')), ('wedding', _('Wedding Registry')), ('baby', _('Baby Registry'))])
 
+    # Specify the model (User) and the fields to include in the form (only 'username' in this case)
     class Meta:
         model = User
         fields = ['username']
 
+    # Check if the password meets Django's password validation requirements
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
         username = self.cleaned_data.get('username')
@@ -30,6 +33,7 @@ class CreateAccountForm(forms.ModelForm):
 
         return password1
 
+    # Make sure password 1 and password 2 are the same
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
@@ -39,6 +43,7 @@ class CreateAccountForm(forms.ModelForm):
 
         return password2
 
+    # Save the user with the hashed password and add into database
     def save(self, commit=True):
         user = super(CreateAccountForm, self).save(commit=False)
         user.set_password(self.cleaned_data['password1'])

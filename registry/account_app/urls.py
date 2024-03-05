@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import index, signin, create_account
 
+# App routing
 urlpatterns = [
     path('', index, name='index'),
     path('signin/', signin, name='signin'),
