@@ -14,7 +14,7 @@ def create_account(request):
         if form.is_valid():
             user = form.save()  # This saves both User and UserProfile
             login(request, user)  # Log the user in after creating the account
-            return redirect('dashboard')  # Redirect to the index page or any other page
+            return redirect('dashboard')  
     else:
         form = CreateAccountForm()
 
