@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, authenticate
-
-def index(request):
-    return render(request, 'account_app/index.html')
-
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import CreateAccountForm
+
+def index(request):
+    return render(request, 'account_app/index.html')
 
 def create_account(request):
     if request.method == 'POST':
@@ -15,7 +14,7 @@ def create_account(request):
         if form.is_valid():
             user = form.save()  # This saves both User and UserProfile
             login(request, user)  # Log the user in after creating the account
-            return redirect('index')  # Redirect to the index page or any other page
+            return redirect('dashboard')  # Redirect to the index page or any other page
     else:
         form = CreateAccountForm()
 
@@ -30,7 +29,7 @@ def signin(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('index')
+                return redirect('dashboard')
     else:
         form = AuthenticationForm()
     return render(request, 'account_app/signin.html', {'form': form})
