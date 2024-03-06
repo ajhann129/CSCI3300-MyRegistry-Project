@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block navbar_buttons %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'signin' %}">Sign In</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'create_account' %}">Create Account</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <h1 class="display-3">Welcome to the Registry App</h1>
+    <p class="lead">Learn more about registries and take action:</p>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Gift List Registry</h5>
+                    <p class="card-text">Create a registry for birthdays, holidays, and special occasions. Easily share your gift preferences with friends and family.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Baby Registry</h5>
+                    <p class="card-text">Celebrate the arrival of a new family member with a baby registry. Add essential items and let loved ones contribute to the joyous occasion.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Wedding Registry</h5>
+                    <p class="card-text">Plan your dream wedding with a personalized wedding registry. Receive gifts that make your special day even more memorable.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h2>Why Choose coolregistry.com?</h2>
+        <p class="lead">Our platform offers a seamless and personalized registry experience for all your special occasions. Enjoy the following features:</p>
+        <ul>
+            <li>Easy creation and management of registries</li>
+            <li>Secure and user-friendly sign-in process</li>
+            <li>Wide range of registry options to suit your needs</li>
+            <li>Effortless sharing with friends and family</li>
+            <li>Responsive customer support</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

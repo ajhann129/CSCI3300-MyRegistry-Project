@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-8">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h2 class="card-title mb-4">Create Account</h2>
+                    <form method="post" action="{% url 'create_account' %}">
+                        {% csrf_token %}
+                        <div class="mb-3 row">
+                            <div class="col">
+                                <input type="text" name="{{ form.username.name }}" class="form-control" placeholder="{{ form.username.label }}">
+                                {% if form.username.errors %}
+                                    <small class="text-danger">{{ form.username.errors }}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col">
+                                <input type="password" name="{{ form.password1.name }}" class="form-control" placeholder="{{ form.password1.label }}">
+                                {% if form.password1.errors %}
+                                    <small class="text-danger">{{ form.password1.errors }}</small>
+                                {% endif %}
+                                <small class="text-muted">
+                                    Your password can’t be too similar to your other personal information.<br>
+                                    Your password must contain at least 8 characters.<br>
+                                    Your password can’t be a commonly used password.<br>
+                                    Your password can’t be entirely numeric.
+                                </small>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col">
+                                <input type="password" name="{{ form.password2.name }}" class="form-control" placeholder="{{ form.password2.label }}">
+                                {% if form.password2.errors %}
+                                    <small class="text-danger">{{ form.password2.errors }}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col">
+                                <select name="{{ form.registry_type.name }}" class="form-control">
+                                    <option value="" selected disabled hidden>{{ form.registry_type.label_tag }}</option>
+                                    {% for value, label in form.registry_type.field.choices %}
+                                        <option value="{{ value }}">{{ label }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% if form.registry_type.errors %}
+                                    <small class="text-danger">{{ form.registry_type.errors }}</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Create Account</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Already have an account? <a href="{% url 'signin' %}">Sign In</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

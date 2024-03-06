@@ -1,0 +1,13 @@
+https://www.w3schools.com/html/html_table_borders.asp
+
+https://www.w3schools.com/html/html_css.asp
+
+https://docs.djangoproject.com/en/5.0/topics/forms/
+
+https://docs.djangoproject.com/en/5.0/topics/db/models/
+
+https://getbootstrap.com/docs/5.3/getting-started/introduction/
+
+https://www.w3schools.com/django/
+
+https://www.w3schools.com/bootstrap5/index.php
