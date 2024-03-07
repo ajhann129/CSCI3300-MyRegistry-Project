@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Wishlist Page</title>
+{% endblock %}
+{% block content %}
+	<style>
+	
+		.boxOutline {
+			position: relative;
+			padding-bottom: 25px;
+		}
+		
+		.wishlistBox {
+			border: 1px solid #ccc;
+			padding: 10px;
+			text-align: center;
+			word-wrap: break-word;
+			max-width: 25ch;
+			position: relative;
+		}
+		
+		.buttonContainer {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+		
+		h3 {
+			margin-bottom: 20px;
+		}
+		
+		.wishlistGrid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			grid-gap: 20px;
+		}
+		
+		.viewButton {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		}
+		
+		.deleteButton {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
+		
+		.confirmDeleteButton {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			display: none;
+			background-color: red;
+			border-color: red;
+			color: white;
+		}
+		
+	</style>
+<h1>My Wishlists</h1>
+
+<!-- Button to create a new wishlist -->
+<button id="createWishlistButton">Create New Wishlist</button>
+
+<!-- Modal for entering wishlist name -->
+<div id="createWishlistModal" style="display: none;">
+    <h2>Create New Wishlist</h2>
+    <form id="createWishlistForm">
+        <label for="wishlistName">Wishlist Name:</label>
+        <input type="text" id="wishlistName" name="wishlistName" maxlength="30" placeholder="Enter wishlist name" required>
+        <button type="submit" id="confirmCreate">Confirm</button>
+        <button type="button" id="cancelCreate">Cancel</button>
+    </form>
+</div>
+
+<!-- Container for displaying wishlists -->
+<div id="wishlistContainer" class="wishlistGrid">
+    <!-- Wishlists will be dynamically added here -->
+</div>
+
+<script>
+var wishlistNames = [];
+
+function createWishlistBox(name) {
+    if (name.trim() !== '' && !wishlistNames.includes(name)) {
+        var wishlistBox = document.createElement('div');
+        wishlistBox.className = 'wishlistBox';
+        wishlistBox.innerHTML = `
+            <div class="boxOutline">
+                <h3>${name}</h3>
+                <div class="buttonContainer">
+                    <button class="viewButton">View</button>
+                    <button class="deleteButton">Delete</button>
+                    <button class="confirmDeleteButton">Confirm Delete</button>
+                </div>
+            </div>
+        `;
+        document.getElementById('wishlistContainer').appendChild(wishlistBox);
+
+        wishlistNames.push(name);
+
+        wishlistBox.querySelector('.viewButton').addEventListener('click', function() {
+            // Add code to redirect the user to the wishlist page using the wishlist name
+        });
+
+        wishlistBox.querySelector('.deleteButton').addEventListener('click', function() {
+            var deleteButton = wishlistBox.querySelector('.deleteButton');
+            var confirmDeleteButton = wishlistBox.querySelector('.confirmDeleteButton');
+
+            if (deleteButton.textContent == 'Delete') {
+                deleteButton.style.display = 'none';
+                confirmDeleteButton.style.display = 'block';
+                confirmDeleteButton.addEventListener('click', function() {
+                    wishlistBox.remove();
+                    deleteWishlist(name);
+                });
+				setTimeout(function() {
+				confirmDeleteButton.style.display = 'none';
+				deleteButton.style.display = 'block';
+				}, 3000);
+				
+            } else {
+                wishlistBox.querySelector('.deleteButton').style.display = 'none';
+                confirmDeleteButton.style.display = 'none';
+                deleteWishlist(name);
+            }
+        });
+    } else {
+        if (name.trim() === '') {
+            alert('Wishlist name cannot be blank');
+        } else {
+            alert('Wishlist name already exists');
+        }
+    }
+}
+
+    function deleteWishlist(name) {
+        wishlistNames = wishlistNames.filter(function(item) {
+            return item !== name;
+        });
+    }
+
+    document.getElementById('createWishlistButton').addEventListener('click', function() {
+        document.getElementById('createWishlistModal').style.display = 'block';
+    });
+
+    document.getElementById('cancelCreate').addEventListener('click', function() {
+        document.getElementById('createWishlistModal').style.display = 'none';
+    });
+
+    document.getElementById('createWishlistForm').addEventListener('submit', function(event) {
+		event.preventDefault();
+		var wishlistNameInput = document.getElementById('wishlistName');
+		var wishlistName = wishlistNameInput.value;
+		createWishlistBox(wishlistName);
+		wishlistNameInput.value = ''; // Clear the text box
+		document.getElementById('createWishlistModal').style.display = 'none';
+	});
+</script>
+{% endblock %}
