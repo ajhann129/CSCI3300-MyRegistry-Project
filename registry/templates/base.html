@@ -11,6 +11,9 @@
                 display: flex;
                 flex-direction: column;
                 min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
+                background-image: url('C:\Users\Daniel\Desktop\Skool\SweProject\CSCI3300-MyRegistry-Project\registry\background.jpg');
+                background-size:cover;
+                background-position: center;
             }
 
             .navbar {
@@ -27,6 +30,7 @@
         </style>
     </head>
     <body>
+        <div class="background-image">
         <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'index' %}">coolregistry.com</a>
@@ -39,6 +43,7 @@
                     </ul>
                 </div>
             </div>
+        </div>
         </nav>
 
         <div class="container mt-3">

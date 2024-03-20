@@ -1,6 +1,35 @@
 {% extends 'base.html' %}
 
+{% block background %}
+<div class="background" style="background-image: url('C:\Users\Daniel\Desktop\Skool\SweProject\CSCI3300-MyRegistry-Project\registry\background.jpg'); background-size: cover; background-position: center;">
+</div>
+{% endblock %}
+
 {% block navbar_buttons %}
+<li class = "nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href = "#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Gift List Registry
+    </a>
+    <div class="dropdown-menu" aria-labelledby="giftListDropdown">
+        <a class="dropdown-item">Create a registry for birthdays, holidays, and special occasions. Easily share your gift preferences with friends and family.</a>
+    </div>
+</li>
+<li class = "nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href = "#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Baby Registry
+    </a>
+    <div class="dropdown-menu" aria-labelledby="babyRegistryDropdown">
+        <a class="dropdown-item">Celebrate the arrival of a new family member with a baby registry. Add essential items and let loved ones contribute to the joyous occasion.</a>
+    </div>
+</li>
+<li class = "nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href = "#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Wedding Registry
+    </a>
+    <div class="dropdown-menu" aria-labelledby="weddingRegistryDropdown">
+        <a class="dropdown-item">Plan your dream wedding with a personalized wedding registry. Receive gifts that make your special day even more memorable.</a>
+    </div>
+</li>
     <li class="nav-item">
         <a class="nav-link" href="{% url 'signin' %}">Sign In</a>
     </li>
@@ -10,48 +39,43 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="container mt-3">
+    <div class="gradient-box>"
     <h1 class="display-3">Welcome to the Registry App</h1>
     <p class="lead">Learn more about registries and take action:</p>
-
-    <div class="row mt-4">
-        <div class="col-md-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Gift List Registry</h5>
-                    <p class="card-text">Create a registry for birthdays, holidays, and special occasions. Easily share your gift preferences with friends and family.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Baby Registry</h5>
-                    <p class="card-text">Celebrate the arrival of a new family member with a baby registry. Add essential items and let loved ones contribute to the joyous occasion.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title">Wedding Registry</h5>
-                    <p class="card-text">Plan your dream wedding with a personalized wedding registry. Receive gifts that make your special day even more memorable.</p>
-                </div>
-            </div>
-        </div>
     </div>
-
-    <div class="mt-4">
-        <h2>Why Choose coolregistry.com?</h2>
-        <p class="lead">Our platform offers a seamless and personalized registry experience for all your special occasions. Enjoy the following features:</p>
-        <ul>
-            <li>Easy creation and management of registries</li>
-            <li>Secure and user-friendly sign-in process</li>
-            <li>Wide range of registry options to suit your needs</li>
-            <li>Effortless sharing with friends and family</li>
-            <li>Responsive customer support</li>
-        </ul>
-    </div>
+    <h1>Want to Make a Wishlist?</h1>
+    <h2 class="refont">Create hundreds of entries using items from your favorite websites and stores:</h2>
+    <div class="pagebreak"></div>
+    <div class="pagebreak"></div>
+    <div class="pagebreak"></div>
+    <div class="pagebreak"></div>
+    <div class="pagebreak"></div>
+    <p class="Pformat">Insert advertisement photo or functionality screenshot</p>
+    <div class="pagebreak"></div>
+    <div class="pagebreak"></div>
+    <div class="pagebreak"></div>
+    <div class="pagebreak"></div>
+    <div class="pagebreak"></div>
+    <div class="pagebreak"></div>
+    <hr class="customHR">
+    <h2 class="refont">Better prepare for the important moments in your life</h2>
+    <p class="Pformat">you can create themesfor your registries: including baby showers, weddings, and more!
+        <div class="pagebreak"></div>
+        <div class="pagebreak"></div>
+        <div class="pagebreak"></div>
+        <div class="pagebreak"></div>
+        <div class="pagebreak"></div>
+        <div class="pagebreak"></div>
+    </p>
+    <p>test. Insert advertisement or photos here</p>
+    <hr class="customHR">
+    <h2 class="refont">coolregistry.com provides "Real Time" updates on your registry</h2>
+    <p class="Pformat">Using our service, see when gifts or other essential items have been purchased, no double gifting!</p>
+    <hr class="customHR">
 </div>
+{% endblock %}
+
+{% block advertisements %}
+    <h1>Want to Make a Wishlist?</h1>
 {% endblock %}
