@@ -1,0 +1,56 @@
+.boxOutline {
+    position: relative;
+    padding-bottom: 25px;
+}
+
+.wishlistBox {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    word-wrap: break-word;
+    max-width: 25ch;
+    position: relative;
+}
+
+.buttonContainer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+h3 {
+    margin-bottom: 20px;
+}
+
+.wishlistGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+}
+
+.viewButton {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.deleteButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.confirmDeleteButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: none;
+    background-color: red;
+    border-color: red;
+    color: white;
+}
