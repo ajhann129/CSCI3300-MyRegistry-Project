@@ -11,3 +11,7 @@ https://getbootstrap.com/docs/5.3/getting-started/introduction/
 https://www.w3schools.com/django/
 
 https://www.w3schools.com/bootstrap5/index.php
+
+https://docs.djangoproject.com/en/5.0/howto/static-files/
+
+https://stackoverflow.com/questions/5898776/how-to-refer-to-static-files-in-my-css-files
