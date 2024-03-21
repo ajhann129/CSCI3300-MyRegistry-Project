@@ -1,0 +1,17 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
+}
+
+.navbar {
+    z-index: 1000; /* Ensure the navbar is on top of other elements */
+}
+
+footer {
+    margin-top: auto; /* Push the footer to the bottom of the flex container */
+    background-color: #dc3545; /* Use the same color as the navbar */
+    color: #fff;
+    padding: 1rem 0; /* Adjust the padding to match the navbar thickness */
+    text-align: center;
+}
