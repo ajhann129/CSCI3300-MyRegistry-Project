@@ -33,7 +33,7 @@ def signin(request):
              # If authentication is successful, log in the user and redirect to the 'dashboard'
             if user is not None:
                 login(request, user)
-                return redirect('dashboard')
+                return redirect('registry_app:dashboard')
     else:
         # If the request method is not POST, create an empty AuthenticationForm instance
         form = AuthenticationForm()
