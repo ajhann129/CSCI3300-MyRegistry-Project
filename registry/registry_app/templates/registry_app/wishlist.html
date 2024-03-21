@@ -16,8 +16,10 @@
 			padding: 10px;
 			text-align: center;
 			word-wrap: break-word;
-			max-width: 25ch;
 			position: relative;
+			max-width: 25ch;
+			display: inline-block;
+			height: fit-content;
 		}
 		
 		.buttonContainer {
@@ -37,26 +39,28 @@
 		
 		.wishlistGrid {
 			display: grid;
-			grid-template-columns: repeat(4, 1fr);
-			grid-gap: 20px;
+			grid-template-columns: repeat(5, 1fr);
+			grid-gap: 15px;
+			padding-top: 20px;
+			padding-bottom: 20px;
 		}
 		
 		.viewButton {
 			position: absolute;
-			bottom: 0;
-			left: 0;
+			bottom: 10px;
+			left: 10px;
 		}
 		
 		.deleteButton {
 			position: absolute;
-			bottom: 0;
-			right: 0;
+			bottom: 10px;
+			right: 10px;
 		}
 		
 		.confirmDeleteButton {
 			position: absolute;
-			bottom: 0;
-			right: 0;
+			bottom: 10px;
+			right: 10px;
 			display: none;
 			background-color: red;
 			border-color: red;
@@ -87,64 +91,71 @@
 
 <script>
 var wishlistNames = [];
+var numBoxes = 0;
 
 function createWishlistBox(name) {
-    if (name.trim() !== '' && !wishlistNames.includes(name)) {
-        var wishlistBox = document.createElement('div');
-        wishlistBox.className = 'wishlistBox';
-        wishlistBox.innerHTML = `
-            <div class="boxOutline">
-                <h3>${name}</h3>
-                <div class="buttonContainer">
-                    <button class="viewButton">View</button>
-                    <button class="deleteButton">Delete</button>
-                    <button class="confirmDeleteButton">Confirm Delete</button>
-                </div>
-            </div>
-        `;
-        document.getElementById('wishlistContainer').appendChild(wishlistBox);
+	if (numBoxes <20) {
+		if (name.trim() !== '' && !wishlistNames.includes(name)) {
+			var wishlistBox = document.createElement('div');
+			wishlistBox.className = 'wishlistBox';
+			wishlistBox.innerHTML = `
+				<div class="boxOutline">
+					<h3>${name}</h3>
+				</div>
+				<div class="buttonContainer">
+					<button class="viewButton">View</button>
+					<button class="deleteButton">Delete</button>
+					<button class="confirmDeleteButton">Confirm Delete</button>
+				</div>
+			`;
+			document.getElementById('wishlistContainer').appendChild(wishlistBox);
 
-        wishlistNames.push(name);
+			wishlistNames.push(name);
+			numBoxes++;
 
-        wishlistBox.querySelector('.viewButton').addEventListener('click', function() {
-            // Add code to redirect the user to the wishlist page using the wishlist name
-        });
+			wishlistBox.querySelector('.viewButton').addEventListener('click', function() {
+				// Add code to redirect the user to the wishlist page using the wishlist name
+			});
 
-        wishlistBox.querySelector('.deleteButton').addEventListener('click', function() {
-            var deleteButton = wishlistBox.querySelector('.deleteButton');
-            var confirmDeleteButton = wishlistBox.querySelector('.confirmDeleteButton');
+			wishlistBox.querySelector('.deleteButton').addEventListener('click', function() {
+				var deleteButton = wishlistBox.querySelector('.deleteButton');
+				var confirmDeleteButton = wishlistBox.querySelector('.confirmDeleteButton');
 
-            if (deleteButton.textContent == 'Delete') {
-                deleteButton.style.display = 'none';
-                confirmDeleteButton.style.display = 'block';
-                confirmDeleteButton.addEventListener('click', function() {
-                    wishlistBox.remove();
-                    deleteWishlist(name);
-                });
-				setTimeout(function() {
-				confirmDeleteButton.style.display = 'none';
-				deleteButton.style.display = 'block';
-				}, 3000);
+				if (deleteButton.textContent == 'Delete') {
+					deleteButton.style.display = 'none';
+					confirmDeleteButton.style.display = 'block';
+					confirmDeleteButton.addEventListener('click', function() {
+						wishlistBox.remove();
+						deleteWishlist(name);
+					});
+					setTimeout(function() {
+					confirmDeleteButton.style.display = 'none';
+					deleteButton.style.display = 'block';
+					}, 3000);
 				
-            } else {
-                wishlistBox.querySelector('.deleteButton').style.display = 'none';
-                confirmDeleteButton.style.display = 'none';
-                deleteWishlist(name);
-            }
-        });
-    } else {
-        if (name.trim() === '') {
-            alert('Wishlist name cannot be blank');
-        } else {
-            alert('Wishlist name already exists');
-        }
-    }
+				} else {
+					wishlistBox.querySelector('.deleteButton').style.display = 'none';
+					confirmDeleteButton.style.display = 'none';
+					deleteWishlist(name);
+				}
+			});
+		} else {
+			if (name.trim() === '') {
+				alert('Wishlist name cannot be blank');
+			} else {
+				alert('Wishlist name already exists');
+			}
+		}
+	}else {
+		alert ('Maximum number of wishlists created (20)');
+	}
 }
 
     function deleteWishlist(name) {
         wishlistNames = wishlistNames.filter(function(item) {
             return item !== name;
         });
+		numBoxes--;
     }
 
     document.getElementById('createWishlistButton').addEventListener('click', function() {
