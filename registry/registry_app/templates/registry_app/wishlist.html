@@ -32,5 +32,9 @@
 
 <div id="wishlist-data" data-url="{% url 'registry_app:load_wishlists' %}"></div>
 
+<script>
+    const createWishlistUrl = "{% url 'registry_app:create_wishlist' %}";
+</script>
+
 <script src="{% static 'registry_app/js/wish_script.js' %}"></script>
 {% endblock %}

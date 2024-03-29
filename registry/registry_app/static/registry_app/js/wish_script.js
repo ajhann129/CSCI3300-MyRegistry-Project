@@ -16,34 +16,44 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('wishlistContainer').appendChild(wishlistBox);
     }
 
-    // Event listener for submitting the create wishlist form
-    document.getElementById('createWishlistForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        var wishlistNameInput = document.getElementById('wishlistName');
-        var wishlistName = wishlistNameInput.value;
-        // AJAX request to create a new wishlist
-        fetch('/create_wishlist/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
-            },
-            body: JSON.stringify({'wishlistName': wishlistName})
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                createWishlistBox(wishlistName, data.wishlist_id); // Call function to create wishlist box
-                wishlistNameInput.value = ''; // Clear the input field
-                document.getElementById('createWishlistModal').style.display = 'none'; // Hide the modal
-            } else {
-                alert('Failed to create wishlist.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    // Function to get CSRF token from cookies
+    function getCSRFToken() {
+        const cookieValue = document.cookie.match(/csrftoken=([^;]+)/);
+        return cookieValue ? cookieValue[1] : '';
+    }
+
+    // Event listener for the "Create New Wishlist" button
+    document.getElementById('createWishlistButton').addEventListener('click', function() {
+        var wishlistName = prompt('Enter the name of the new wishlist:');
+        if (wishlistName.trim() !== '') {
+            // Make a POST request to create a new wishlist
+            fetch(createWishlistUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken() // Include CSRF token in headers
+                },
+                body: JSON.stringify({wishlistName: wishlistName}) // Send wishlist name in the request body
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // If the wishlist creation is successful, display a success message
+                    alert('Wishlist created successfully!');
+                } else {
+                    // Handle error if wishlist creation fails
+                    alert('Failed to create wishlist. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while creating wishlist. Please try again.');
+            });
+        } else {
+            alert('Wishlist name cannot be empty.');
+        }
     });
+
 
     // Function to delete a wishlist box
     function deleteWishlistBox(wishlistBox) {

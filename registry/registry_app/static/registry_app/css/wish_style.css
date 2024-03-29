@@ -1,53 +1,61 @@
 .boxOutline {
-    position: relative;
-    padding-bottom: 25px;
+	position: relative;
+	padding-bottom: 25px;
 }
+
 .wishlistBox {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-    word-wrap: break-word;
-    position: relative;
-    max-width: 25ch;
-    display: inline-block;
-    height: fit-content;
+	border: 1px solid #ccc;
+	padding: 10px;
+	text-align: center;
+	word-wrap: break-word;
+	max-width: 25ch;
+	position: relative;
+	width: 25ch;
+	display: inline-block;
+	height: fit-content;
 }
+
 .buttonContainer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
 }
+
 h3 {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
+
 .wishlistGrid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 15px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-gap: 15px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
+
 .viewButton {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
 }
+
 .deleteButton {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
 }
+
 .confirmDeleteButton {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: none;
-    background-color: red;
-    border-color: red;
-    color: white;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	display: none;
+	background-color: red;
+	border-color: red;
+	color: white;
 }
