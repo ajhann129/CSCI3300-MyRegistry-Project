@@ -12,18 +12,7 @@
 <h1>My Wishlists</h1>
 
 <!-- Button to create a new wishlist -->
-<button id="createWishlistButton">Create New Wishlist</button>
-
-<!-- Modal for entering wishlist name -->
-<div id="createWishlistModal" style="display: none;">
-    <h2>Create New Wishlist</h2>
-    <form id="createWishlistForm">
-        <label for="wishlistName">Wishlist Name:</label>
-        <input type="text" id="wishlistName" name="wishlistName" maxlength="30" placeholder="Enter wishlist name" required>
-        <button type="submit" id="confirmCreate">Confirm</button>
-        <button type="button" id="cancelCreate">Cancel</button>
-    </form>
-</div>
+<a href="{% url 'registry_app:create_wishlist' %}" class="btn btn-primary">Create New Wishlist</a>
 
 <!-- Container for displaying wishlists -->
 <div id="wishlistContainer" class="wishlistGrid">
@@ -31,10 +20,6 @@
 </div>
 
 <div id="wishlist-data" data-url="{% url 'registry_app:load_wishlists' %}"></div>
-
-<script>
-    const createWishlistUrl = "{% url 'registry_app:create_wishlist' %}";
-</script>
 
 <script src="{% static 'registry_app/js/wish_script.js' %}"></script>
 {% endblock %}

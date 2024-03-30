@@ -1,6 +1,7 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Wishlist
+from .forms import WishlistForm
 
 # Create your views here.
 
@@ -12,11 +13,15 @@ def wishlist_view(request):
 
 def create_wishlist(request):
     if request.method == 'POST':
-        wishlist_name = request.POST.get('wishlistName')
-        user = request.user
-        wishlist = Wishlist.objects.create(user=user, name=wishlist_name)
-        return JsonResponse({'success': True, 'wishlist_id': wishlist.id})
-    return JsonResponse({'success': False})
+        form = WishlistForm(request.POST)
+        if form.is_valid():
+            wishlist_name = form.cleaned_data['wishlist_name']
+            user = request.user
+            wishlist = Wishlist.objects.create(user=user, name=wishlist_name)
+            return redirect('registry_app:dashboard')  # Redirect to the dashboard
+    else:
+        form = WishlistForm()
+    return render(request, 'registry_app/create_wishlist.html', {'form': form})
 
 def delete_wishlist(request):
     if request.method == 'POST':
