@@ -18,7 +18,7 @@ def create_wishlist(request):
             wishlist_name = form.cleaned_data['wishlist_name']
             user = request.user
             wishlist = Wishlist.objects.create(user=user, name=wishlist_name)
-            return redirect('registry_app:dashboard')  # Redirect to the dashboard
+            return redirect('registry_app:wishlist')  # Redirect to the dashboard
     else:
         form = WishlistForm()
     return render(request, 'registry_app/create_wishlist.html', {'form': form})
