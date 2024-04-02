@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Access the base URL from the data attribute
     const wishlistUrl = document.getElementById('wishlist-data').getAttribute('data-url');
-    //const deleteWishlistUrl = document.getElementById('wishlist-data').getAttribute('data-delete-url');
 
     // Function to load wishlists from the database and display them on page load
     function loadWishlists() {
