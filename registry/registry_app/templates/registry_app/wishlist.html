@@ -19,7 +19,9 @@
     <!-- Wishlists will be dynamically added here -->
 </div>
 
-<div id="wishlist-data" data-url="{% url 'registry_app:load_wishlists' %}"></div>
+<div id="wishlist-data" 
+     data-url="{% url 'registry_app:load_wishlists' %}">
+</div>
 
 <script src="{% static 'registry_app/js/wish_script.js' %}"></script>
 {% endblock %}

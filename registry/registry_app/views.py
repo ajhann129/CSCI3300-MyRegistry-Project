@@ -1,7 +1,8 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Wishlist
 from .forms import WishlistForm
+
 
 # Create your views here.
 
@@ -23,16 +24,19 @@ def create_wishlist(request):
         form = WishlistForm()
     return render(request, 'registry_app/create_wishlist.html', {'form': form})
 
-def delete_wishlist(request):
-    if request.method == 'POST':
-        wishlist_id = request.POST.get('wishlistId')
-        try:
-            wishlist = Wishlist.objects.get(pk=wishlist_id, user=request.user)
-            wishlist.delete()
-            return JsonResponse({'success': True})
-        except Wishlist.DoesNotExist:
-            return JsonResponse({'success': False})
-    return JsonResponse({'success': False})
+def delete_wishlist(request, wishlist_id):
+    # Retrieve the wishlist object from the database or return a 404 error if not found
+    wishlist = get_object_or_404(Wishlist, pk=wishlist_id)
+    
+    # Ensure that the current user owns the wishlist
+    if wishlist.user == request.user:
+        # Delete the wishlist from the database
+        wishlist.delete()
+        # Return a success JSON response
+        return JsonResponse({'success': True})
+    else:
+        # Return a failure JSON response if the user does not own the wishlist
+        return JsonResponse({'success': False})
 
 def load_wishlists(request):
     if request.method == 'GET':
