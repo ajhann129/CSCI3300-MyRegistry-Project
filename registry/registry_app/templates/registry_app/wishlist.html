@@ -1,10 +1,7 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
 {% block title %} Wishlist Page {% endblock %}
-
-
 
 {% block css %} 
 <link rel="stylesheet" href="{% static 'registry_app/css/wish_style.css' %}">
@@ -14,8 +11,17 @@
 
 <h1>My Wishlists</h1>
 
-<!-- Button to create a new wishlist -->
-<a href="{% url 'registry_app:create_wishlist' %}" class="btn btn-primary">Create New Wishlist</a>
+<!-- Form to create a new wishlist -->
+<div id="createWishlistForm">
+    <form method="post" action="{% url 'registry_app:create_wishlist' %}">
+        {% csrf_token %}
+        <label for="wishlist_name">Wishlist Name:</label>
+        <input type="text" id="wishlist_name" name="wishlist_name">
+        <button type="submit">Create Wishlist</button>
+    </form>
+</div>
+
+<hr> <!-- Horizontal rule -->
 
 <!-- Container for displaying wishlists -->
 <div id="wishlistContainer" class="wishlistGrid">
