@@ -15,9 +15,10 @@
 <div id="createWishlistForm">
     <form method="post" action="{% url 'registry_app:create_wishlist' %}">
         {% csrf_token %}
-        <label for="wishlist_name">Wishlist Name:</label>
+        <label for="wishlist_name"><b>Create New Wishlist:</b></label>
         <input type="text" id="wishlist_name" name="wishlist_name">
-        <button type="submit">Create Wishlist</button>
+        <button type="submit">Confirm</button>
+        <button type="reset">Cancel</button>
     </form>
 </div>
 
