@@ -15,3 +15,15 @@ https://www.w3schools.com/bootstrap5/index.php
 https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 https://stackoverflow.com/questions/5898776/how-to-refer-to-static-files-in-my-css-files
+
+https://medium.com/@rajputgajanan50/ajax-in-django-72b895708167#:~:text=One%20of%20the%20features%20that,without%20requiring%20a%20page%20reload.
+
+https://www.geeksforgeeks.org/what-is-an-asynchronous-request-in-ajax/
+
+https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents
+
+https://docs.djangoproject.com/en/5.0/ref/csrf/#:~:text=How%20it%20works%C2%B6,with%20the%20response%20whenever%20django.
+
+https://www.sencha.com/blog/event-handling-in-javascript-a-practical-guide-with-examples/#:~:text=Event%20handling%20in%20JS%20refers,event%20handlers%20or%20callback%20functions.
+
+https://developer.mozilla.org/en-US/docs/Web/Events/Event_handlers
