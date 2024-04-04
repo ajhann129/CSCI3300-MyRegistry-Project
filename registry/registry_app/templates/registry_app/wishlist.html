@@ -19,8 +19,16 @@
         <input type="text" id="wishlist_name" name="wishlist_name">
         <button type="submit">Confirm</button>
         <button type="reset">Cancel</button>
+        {% if messages %}
+            <ul class="errorlist">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </form>
 </div>
+
 
 <hr> <!-- Horizontal rule -->
 

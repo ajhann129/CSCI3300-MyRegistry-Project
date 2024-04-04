@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Wishlist
 from .forms import WishlistForm
+from django.contrib import messages
 
 
 # Create your views here.
@@ -18,8 +19,13 @@ def create_wishlist(request):
         if form.is_valid():
             wishlist_name = form.cleaned_data['wishlist_name']
             user = request.user
-            wishlist = Wishlist.objects.create(user=user, name=wishlist_name)
-            return redirect('registry_app:wishlist')  # Redirect to the wishlist page after creating a new wishlist
+            # Check if a wishlist with the same name already exists
+            if Wishlist.objects.filter(user=user, name=wishlist_name).exists():
+                messages.error(request, "A wishlist with this name already exists.")
+            else:
+                # Create a new wishlist if no duplicate name found
+                wishlist = Wishlist.objects.create(user=user, name=wishlist_name)
+                return redirect('registry_app:wishlist')  # Redirect to the wishlist page after creating a new wishlist
     else:
         form = WishlistForm()
     return render(request, 'registry_app/wishlist.html', {'form': form})
