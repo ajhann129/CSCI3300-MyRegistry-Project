@@ -39,26 +39,33 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Event listener for clicking the delete button
     document.addEventListener("click", function(event) {
-        const clickedElement = event.target;
         // Check if the clicked element is a delete button
-        if (clickedElement.classList.contains("deleteButton")) {
-            const deleteButton = clickedElement;
-            // Check if it's already in confirm delete mode
-            if (deleteButton.dataset.confirmDelete === "true") {
-                // Extract the wishlist ID from the dataset
+        if (event.target.classList.contains("deleteButton")) {
+            // Get the delete button element
+            const deleteButton = event.target;
+            // Check if the delete button is in confirm mode
+            if (deleteButton.dataset.confirm === "true") {
+                // Perform delete action
                 const wishlistId = deleteButton.dataset.wishlistId;
-                // Call the deleteWishlist function with the wishlist ID
                 deleteWishlist(wishlistId);
                 // Remove the wishlist box from the page
                 const wishlistBox = deleteButton.closest('.wishlistBox');
                 wishlistBox.remove();
             } else {
                 // Change the button text and background color
-                deleteButton.textContent = "Confirm Deletion";
+                deleteButton.textContent = "Confirm Delete";
                 deleteButton.style.backgroundColor = "red";
-                // Set dataset attribute to true
-                deleteButton.dataset.confirmDelete = "true";
+                // Set confirm mode
+                deleteButton.dataset.confirm = "true";
             }
+        } else {
+            // Revert all confirmation buttons back to delete buttons
+            const confirmationButtons = document.querySelectorAll(".deleteButton[data-confirm='true']");
+            confirmationButtons.forEach(button => {
+                button.textContent = "Delete";
+                button.style.backgroundColor = "";
+                button.dataset.confirm = "false";
+            });
         }
     });
 
