@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Remove the wishlist box from the page
                 const wishlistBox = deleteButton.closest('.wishlistBox');
                 wishlistBox.remove();
-                checkAndToggleMaxWishlistMessage();
             } else {
                 // Change the button text and background color
                 deleteButton.textContent = "Confirm Delete";
