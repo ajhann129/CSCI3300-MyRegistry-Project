@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Function to create a new wishlist box
     function createWishlistBox(name, id) {
-        var wishlistBox = document.createElement('div');
+        let wishlistBox = document.createElement('div');
         wishlistBox.className = 'wishlistBox';
         wishlistBox.dataset.wishlistId = id; // Store wishlist ID as a data attribute
         wishlistBox.innerHTML = `
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to send a POST request to delete a wishlist
     function deleteWishlist(wishlistId) {
         // Send a POST request to the delete wishlist endpoint with the wishlist ID
-        fetch(`/home/delete_wishlist/${wishlistId}/`, {
+        fetch(`/registries/delete_wishlist/${wishlistId}/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -94,6 +94,37 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // Event listener for clicking the view button
+    document.addEventListener("click", function(event) {
+        if (event.target.classList.contains("viewButton")) {
+            // Retrieve the wishlist ID from the data attribute
+            let wishlistId = event.target.closest('.wishlistBox').dataset.wishlistId;
+            // Create a form element
+            const form = document.createElement('form');
+            // Set the method and action attributes
+            form.method = 'post';
+            form.action = '/dashboard';
+            // Create an input element for the CSRF token
+            const csrfToken = getCSRFToken();
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = csrfToken;
+            // Create an input element for the wishlist ID
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'wishlist_id';
+            input.value = wishlistId;
+            // Append the input elements to the form
+            form.appendChild(csrfInput);
+            form.appendChild(input);
+            // Append the form to the document body
+            document.body.appendChild(form);
+            // Submit the form
+            form.submit();
+        }
+    });
+
     // Function to retrieve the CSRF token from cookies
     function getCSRFToken() {
         // Use regex to extract the CSRF token value from the cookie
@@ -111,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault(); // Prevent form submission
             return;
         }
-        
+
         // Check if maximum number of wishlists is reached
         if (document.querySelectorAll('.wishlistBox').length >= 20) {
             document.getElementById('maxWishlistMessage').style.display = 'block';
