@@ -16,8 +16,8 @@
     <form method="post" action="{% url 'registry_app:create_wishlist' %}">
         {% csrf_token %}
         <label for="wishlist_name"><b>Create New Wishlist:</b></label>
-        <input type="text" id="wishlist_name" name="wishlist_name">
-        <button type="submit">Confirm</button>
+        <input type="text" id="wishlist_name" name="wishlist_name" maxlength="45">
+        <button type="submit" id="createButton">Confirm</button>
         <button type="reset">Cancel</button>
         {% if messages %}
             <ul class="errorlist">
@@ -29,6 +29,7 @@
     </form>
 </div>
 
+<p id="maxWishlistMessage" style="color: red; display: none;">Max number of wishlists created (20)</p>
 
 <hr> <!-- Horizontal rule -->
 
