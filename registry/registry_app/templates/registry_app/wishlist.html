@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% load static %}
 
 {% block title %} Wishlist Page {% endblock %}
@@ -12,23 +11,34 @@
 
 <h1>My Wishlists</h1>
 
-<!-- Button to create a new wishlist -->
-<button id="createWishlistButton">Create New Wishlist</button>
-
-<!-- Modal for entering wishlist name -->
-<div id="createWishlistModal" style="display: none;">
-    <h2>Create New Wishlist</h2>
-    <form id="createWishlistForm">
-        <label for="wishlistName">Wishlist Name:</label>
-        <input type="text" id="wishlistName" name="wishlistName" maxlength="30" placeholder="Enter wishlist name" required>
-        <button type="submit" id="confirmCreate">Confirm</button>
-        <button type="button" id="cancelCreate">Cancel</button>
+<!-- Form to create a new wishlist -->
+<div id="createWishlistForm">
+    <form method="post" action="{% url 'registry_app:create_wishlist' %}">
+        {% csrf_token %}
+        <label for="wishlist_name"><b>Create New Wishlist:</b></label>
+        <input type="text" id="wishlist_name" name="wishlist_name">
+        <button type="submit">Confirm</button>
+        <button type="reset">Cancel</button>
+        {% if messages %}
+            <ul class="errorlist">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </form>
 </div>
+
+
+<hr> <!-- Horizontal rule -->
 
 <!-- Container for displaying wishlists -->
 <div id="wishlistContainer" class="wishlistGrid">
     <!-- Wishlists will be dynamically added here -->
+</div>
+
+<div id="wishlist-data" 
+     data-url="{% url 'registry_app:load_wishlists' %}">
 </div>
 
 <script src="{% static 'registry_app/js/wish_script.js' %}"></script>

@@ -59,3 +59,35 @@ h3 {
 	border-color: red;
 	color: white;
 }
+
+.background-image {
+    background-image: url('/img/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+body {
+    background-image: url('/img/background.jpg');
+}
+.gradient-box {
+    border: 2px solid block;
+    padding: 20px;
+    background: linear-gradient(to bottom right, red, white);
+    
+}
+@media print {
+    .pagebreak {page-break-before: always;}
+}
+.refont {
+    font-family: monospace;
+    color: red;
+}
+.customHR {
+    border: none;
+    height: 5px;
+    background-color: red;
+}
+.Preformat {
+    font-family: serif;
+    font-weight: bold;
+    color: red; 
+}
