@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
         document.getElementById('wishlistContainer').appendChild(wishlistBox);
+        checkAndToggleMaxWishlistMessage();
     }
 
     // Access the base URL from the data attribute
@@ -51,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Remove the wishlist box from the page
                 const wishlistBox = deleteButton.closest('.wishlistBox');
                 wishlistBox.remove();
+                checkAndToggleMaxWishlistMessage(); // Check and toggle max wishlist message
             } else {
                 // Change the button text and background color
                 deleteButton.textContent = "Confirm Delete";
@@ -100,4 +102,34 @@ document.addEventListener("DOMContentLoaded", function() {
         return cookieValue ? cookieValue[1] : "";
     }    
 
+    // Event listener for clicking the create button
+    function handleCreateButtonClick(event) {
+        const wishlistName = document.getElementById('wishlist_name').value;
+        // Check if wishlist name is empty or exceeds 45 characters
+        if (wishlistName.trim() === '' || wishlistName.length > 45) {
+            alert('Wishlist name must not be empty and should be maximum 45 characters long');
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+
+        // Check if maximum number of wishlists is reached
+        if (document.querySelectorAll('.wishlistBox').length >= 20) {
+            document.getElementById('maxWishlistMessage').style.display = 'block';
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+    }
+
+    // Add event listener for create button
+    const createButton = document.getElementById('createButton');
+    if (createButton) {
+        createButton.addEventListener('click', handleCreateButtonClick);
+    }
+
+    // Function to check and toggle max wishlist message
+    function checkAndToggleMaxWishlistMessage() {
+        if (document.querySelectorAll('.wishlistBox').length < 20) {
+            document.getElementById('maxWishlistMessage').style.display = 'none';
+        }
+    }
 });
