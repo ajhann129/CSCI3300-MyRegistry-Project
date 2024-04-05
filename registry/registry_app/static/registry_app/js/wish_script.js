@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Function to send a POST request to delete a wishlist
     function deleteWishlist(wishlistId) {
         // Send a POST request to the delete wishlist endpoint with the wishlist ID
-        fetch(`/home/delete_wishlist/${wishlistId}/`, {
+        fetch(`/registries/delete_wishlist/${wishlistId}/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
