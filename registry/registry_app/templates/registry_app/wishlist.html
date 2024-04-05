@@ -6,10 +6,14 @@
 
 {% block css %} 
 <link rel="stylesheet" href="{% static 'registry_app/css/wish_style.css' %}">
+<link rel="stylesheet" href="{% static 'account_app/css/tempTest.css' %}">
+{% endblock %}
+
+{% block navbar_buttons %}
+<button onclick="history.back()" class="buttonCSS">Back</button>
 {% endblock %}
 
 {% block content %}
-
 <h1>My Wishlists</h1>
 
 <!-- Button to create a new wishlist -->

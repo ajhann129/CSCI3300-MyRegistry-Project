@@ -55,12 +55,12 @@ h3 {
     color: white;
 }
 .background-image {
-    background-image: url('static/img/wishlistBG.png');
+    background-image: url('/static/img/wishlistBG.png');
     background-size: cover;
     background-position: center;
 }
 body {
-    background-image: url('static/img/wishlistBG.png');
+    background-image: url('/static/img/wishlistBG.png');
 }
 .gradient-box {
     border: 2px solid block;
@@ -86,8 +86,17 @@ body {
     color: red; 
 }
 .myWishlistBG {
-    background-image: url('static/img/wishlistBG.png');
+    background-image: url('/static/img/wishlistBG.png');
     background-size: cover;
     background-position: center;
 }
-.createWishListButton:hover{background-color: blue;}
+.body {
+    background-color: blanchedalmond;
+}
+.buttonCSS {
+    background-color: pink;
+    border-radius: 15px;
+    padding: 15px 25px;
+    font-size: 24px;
+}
+.buttonCSS:hover {background-color: blue;}
