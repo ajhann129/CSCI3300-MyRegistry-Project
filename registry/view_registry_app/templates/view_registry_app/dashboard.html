@@ -7,9 +7,19 @@
         <div class="row justify-content-center">
             <div class="col-md-12 col-lg-8">
                 <h2 class="text-center mb-4">Dashboard</h2>
-                <!-- Add your dashboard content here -->
+                <!-- Loop through registry items and display them -->
+                {% for item in registry_items %}
+                    <div class="item">
+                        <h3>{{ item.name }}</h3>
+                        <p>Price: ${{ item.price }}</p>
+                        <p>Quantity: {{ item.quantity }}</p>
+                        {% if item.description %}
+                            <p>Description: {{ item.description }}</p>
+                        {% endif %}
+                    </div>
+                    <hr> <!-- Horizontal rule between items -->
+                {% endfor %}
             </div>
         </div>
     </div>
-    {{ block.super }}
 {% endblock %}

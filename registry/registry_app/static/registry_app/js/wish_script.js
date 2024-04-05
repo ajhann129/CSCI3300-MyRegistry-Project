@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Function to create a new wishlist box
     function createWishlistBox(name, id) {
-        var wishlistBox = document.createElement('div');
+        let wishlistBox = document.createElement('div');
         wishlistBox.className = 'wishlistBox';
         wishlistBox.dataset.wishlistId = id; // Store wishlist ID as a data attribute
         wishlistBox.innerHTML = `
@@ -14,13 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
         document.getElementById('wishlistContainer').appendChild(wishlistBox);
-
-        // Add event listener to the view button
-        wishlistBox.querySelector('.viewButton').addEventListener('click', function(event) {
-            // Redirect to the dashboard page with the wishlist ID
-            const wishlistId = wishlistBox.dataset.wishlistId;
-            window.location.href = `/dashboard/${wishlistId}/`;
-        });
     }
 
     // Access the base URL from the data attribute
@@ -98,6 +91,37 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error("Error:", error);
         });
     }
+
+    // Event listener for clicking the view button
+    document.addEventListener("click", function(event) {
+        if (event.target.classList.contains("viewButton")) {
+            // Retrieve the wishlist ID from the data attribute
+            let wishlistId = event.target.closest('.wishlistBox').dataset.wishlistId;
+            // Create a form element
+            const form = document.createElement('form');
+            // Set the method and action attributes
+            form.method = 'post';
+            form.action = '/dashboard';
+            // Create an input element for the CSRF token
+            const csrfToken = getCSRFToken();
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = csrfToken;
+            // Create an input element for the wishlist ID
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'wishlist_id';
+            input.value = wishlistId;
+            // Append the input elements to the form
+            form.appendChild(csrfInput);
+            form.appendChild(input);
+            // Append the form to the document body
+            document.body.appendChild(form);
+            // Submit the form
+            form.submit();
+        }
+    });
 
     // Function to retrieve the CSRF token from cookies
     function getCSRFToken() {
