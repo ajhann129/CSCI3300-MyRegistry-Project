@@ -4,6 +4,9 @@ from .forms import ItemForm
 
 # Create your views here.
 
+def dashboard(request):
+    return render(request, 'view_registry_app/dashboard.html')
+
 def create_item(request, wishlist_id):
     if request.method == 'POST':
         form = ItemForm(request.POST)
@@ -15,6 +18,3 @@ def create_item(request, wishlist_id):
     else:
         form = ItemForm()
     return render(request, 'view_registry_app/create_item.html', {'form': form})
-
-def dashboard(request):
-    return render(request, 'view_registry_app/dashboard.html')

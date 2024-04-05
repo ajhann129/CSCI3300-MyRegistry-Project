@@ -14,6 +14,13 @@ document.addEventListener("DOMContentLoaded", function() {
             </div>
         `;
         document.getElementById('wishlistContainer').appendChild(wishlistBox);
+
+        // Add event listener to the view button
+        wishlistBox.querySelector('.viewButton').addEventListener('click', function(event) {
+            // Redirect to the dashboard page with the wishlist ID
+            const wishlistId = wishlistBox.dataset.wishlistId;
+            window.location.href = `/dashboard/${wishlistId}/`;
+        });
     }
 
     // Access the base URL from the data attribute
