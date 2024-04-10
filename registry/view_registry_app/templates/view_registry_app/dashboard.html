@@ -5,6 +5,55 @@
 
 {% block css %} 
 <link rel="stylesheet" href="{% static 'view_registry_app/css/style.css' %}">
+<style>
+    /* Style for modal overlay */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+    .modal-content {
+        background-color: white;
+        width: 80%;
+        max-width: 650px;
+        margin: 100px auto;
+        padding: 20px;
+        border-radius: 8px;
+    }
+    .form-group {
+		margin-bottom: 15px;
+		position: relative;
+    }
+    .btn-container {
+		position: absolute;
+		bottom: 5px;
+		right: 5px;
+		display: flex;
+		justify-content: flex-end;
+	}
+	.btn-container button {
+		margin-left: 10px;
+	}
+    .form-row {
+        display: flex;
+        justify-content: space-between;
+    }
+    .form-row .form-group {
+        width: 30%;
+    }
+	.form-group textarea {
+		width: 100%;
+		box-sizing: border-box;
+		min-height: 60px;
+		max-height: 400px;
+		resize: vertical;
+	}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -24,9 +73,108 @@
                     </div>
                     <hr> <!-- Horizontal rule between items -->
                 {% endfor %}
+                <!-- Button to trigger modal overlay -->
+                <button id="createNewItemBtn" class="btn btn-primary">Create New Item</button>
             </div>
         </div>
     </div>
 
+    <!-- Modal overlay for creating new item -->
+	<div class="modal-overlay" id="createItemModal">
+		<div class="modal-content">
+			<h2>Create New Item</h2>
+			<div class="form-row">
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input type="text" id="name" placeholder="Enter Name" value="">
+				</div>
+				<div class="form-group">
+					<label for="price">Price:</label>
+					<input type="number" id="price" placeholder="Enter Price" min="0" value="">
+				</div>
+				<div class="form-group">
+					<label for="quantity">Quantity:</label>
+					<input type="number" id="quantity" placeholder="Enter Quantity" min="0" step="1" value="">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="description">Description:</label>
+				<br>
+				<textarea id="description" placeholder="Enter Description"></textarea>
+				<hr>
+			</div>
+			<div class="btn-container">
+				<button type="button" class="btn btn-secondary" id="closeModalBtn">Cancel</button>
+				<button type="button" class="btn btn-success" id="createItemBtn">Create</button>
+			</div>
+		</div>
+	</div>
+
     <script src="{% static 'view_registry_app/js/script.js' %}"></script>
+<script>
+    // Function to show the modal overlay
+    function showModal() {
+        // Reset form values
+        document.getElementById('name').value = "";
+        document.getElementById('price').value = "";
+        document.getElementById('quantity').value = "";
+        document.getElementById('description').value = "";
+
+        document.getElementById('createItemModal').style.display = 'block';
+    }
+
+    // Function to hide the modal overlay
+    function hideModal() {
+        document.getElementById('createItemModal').style.display = 'none';
+    }
+
+    // Event listener for the Create New Item button
+    document.getElementById('createNewItemBtn').addEventListener('click', function() {
+        showModal();
+    });
+
+    // Event listener for the Cancel button
+    document.getElementById('closeModalBtn').addEventListener('click', function() {
+        hideModal();
+    });
+
+    // Event listener for the Create button
+    document.getElementById('createItemBtn').addEventListener('click', function() {
+        // Get form data
+        var name = document.getElementById('name').value;
+        var price = document.getElementById('price').value;
+        var quantity = document.getElementById('quantity').value;
+        var description = document.getElementById('description').value;
+
+        // Check if price and quantity are valid
+        if (price < 0 || quantity < 0) {
+            alert("Price and quantity cannot be negative");
+            return;
+        }
+
+        // AJAX request to create the item
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/create_item/', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Item created successfully, add it to the dashboard
+                var newItem = JSON.parse(xhr.responseText);
+                var itemHTML = `
+                    <div class="item">
+                        <h3>${newItem.name}</h3>
+                        <p>Price: $${newItem.price}</p>
+                        <p>Quantity: ${newItem.quantity}</p>
+                        ${newItem.description ? `<p>Description: ${newItem.description}</p>` : ''}
+                    </div>
+                    <hr>`;
+				document.querySelector('.col-md-12.col-lg-8').insertAdjacentHTML('beforeend', itemHTML);
+
+				// Close the modal
+				document.getElementById('createItemModal').style.display = 'none';
+			}
+		};
+		xhr.send(JSON.stringify({name: name, price: price, quantity: quantity, description: description}));
+	});
+</script>
 {% endblock %}
