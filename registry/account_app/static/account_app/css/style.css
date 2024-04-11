@@ -17,7 +17,9 @@ body {
 }
 .refont {
     font-family: monospace;
-    color: red;
+    color: black;
+    border: solid black 5px;
+    
 }
 .customHR {
     border: none;
@@ -28,4 +30,22 @@ body {
     font-family: serif;
     font-weight: bold;
     color: red; 
+}
+.card-body {
+    border: solid red 2px;
+}
+
+.myWishlistBG {
+    background-image: url('/static/img/wishlistBG.png');
+    background-size: cover; 
+    background-position: center;
+}
+.buttonCSS {
+    background-color: pink;
+    border-radius: 15px;
+    padding: 15px 25px;
+    font-size: 24px;
+}
+.indexHeader {
+    border: 5px solid blue;
 }

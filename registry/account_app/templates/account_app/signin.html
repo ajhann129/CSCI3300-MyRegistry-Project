@@ -4,6 +4,14 @@
 
 {% block title %} Sign In {% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'account_app/css/style.css' %}">
+{% endblock %}
+
+{% block navbar_buttons %}
+<button onclick="history.back()" class="buttonCSS">Back</button>
+{% endblock %}
+
 {% block content %}
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -39,7 +47,7 @@
                         <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                     </form>
                     <div class="text-center mt-3">
-                        <p>Don't have an account? <a href="{% url 'create_account' %}">Create Account</a></p>
+                        <p>Don't have an account? <a href="{% url 'create_account' %}">Click Here</a> to start your adventure today.</p>
                     </div>
                 </div>
             </div>

@@ -3,6 +3,10 @@
 
 {% block title %} Dashboard {% endblock %}
 
+{% block navbar_buttons %}
+<button onclick="history.back()" class="buttonCSS">Back</button>
+{% endblock %}
+
 {% block css %} 
 <link rel="stylesheet" href="{% static 'view_registry_app/css/style.css' %}">
 <style>
