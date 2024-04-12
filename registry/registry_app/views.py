@@ -1,8 +1,11 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import logout
+from django.contrib import messages
+
 from .models import Wishlist
 from .forms import WishlistForm
-from django.contrib import messages
+
 
 
 # Create your views here.
@@ -54,3 +57,7 @@ def load_wishlists(request):
     else:
         # Handle invalid requests (e.g., POST requests)
         return JsonResponse({'error': 'Invalid request method'}, status=400)
+    
+def sign_out(request):
+    logout(request)
+    return redirect('index')
