@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
+from django.contrib.auth import logout
+
 from .models import Item
 from .forms import ItemForm
 
@@ -44,3 +46,7 @@ def delete_item(request, item_id):
     else:
         # Handle GET requests for the delete_item view
         return HttpResponseRedirect('/')
+    
+def sign_out(request):
+    logout(request)
+    return redirect('index')
