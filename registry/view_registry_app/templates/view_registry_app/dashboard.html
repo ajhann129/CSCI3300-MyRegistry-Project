@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block navbar_buttons %}
-<button id="wishlistButton" class="buttonCSS" data-wishlist-url="{% url 'registry_app:wishlist' %}">Back</button>
+<a class="nav-link btn btn-primary" href="{% url 'registry_app:wishlist' %}">Back to Registry Page</a>
 {% endblock %}
 
 {% block content %}
