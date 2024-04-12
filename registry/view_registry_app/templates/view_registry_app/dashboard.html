@@ -17,42 +17,47 @@
         <div class="row justify-content-center">
             <div class="col-md-12 col-lg-8">
                 <h2 class="text-center mb-4">Dashboard</h2>
-                <!-- Form for creating a new item -->
-                <form id="dashboardForm" method="post" action="{% url 'view_registry_app:create_item' wishlist.id %}">
-                    {% csrf_token %}
-                    <!-- Include a hidden input field to store the wishlist_id -->
-                    <input type="hidden" name="wishlist_id" id="wishlist_id" value="{{ wishlist.id }}">
-                    <!-- Rest of the form fields -->
-                    <div class="mb-3 row">
-                        <div class="col">
-                            <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" class="form-control">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <div class="col">
-                            <label for="price">Price:</label>
-                            <input type="number" name="price" id="price" class="form-control" min="0">
-                        </div>
-                        <div class="col">
-                            <label for="quantity">Quantity:</label>
-                            <input type="number" name="quantity" id="quantity" class="form-control" min="0" step="1">
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <div class="col">
-                            <label for="description">Description:</label>
-                            <textarea name="description" id="description" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <div class="col">
-                            <label for="link">Link:</label>
-                            <input type="url" name="link" id="link" class="form-control">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Create Item</button>
-                </form>
+
+                {% if user.is_authenticated %}
+                    {% if wishlist.user == user %}
+                        <!-- Form for creating a new item -->
+                        <form id="dashboardForm" method="post" action="{% url 'view_registry_app:create_item' wishlist.id %}">
+                            {% csrf_token %}
+                            <!-- Include a hidden input field to store the wishlist_id -->
+                            <input type="hidden" name="wishlist_id" id="wishlist_id" value="{{ wishlist.id }}">
+                            <!-- Rest of the form fields -->
+                            <div class="mb-3 row">
+                                <div class="col">
+                                    <label for="name">Name:</label>
+                                    <input type="text" name="name" id="name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col">
+                                    <label for="price">Price:</label>
+                                    <input type="number" name="price" id="price" class="form-control" min="0">
+                                </div>
+                                <div class="col">
+                                    <label for="quantity">Quantity:</label>
+                                    <input type="number" name="quantity" id="quantity" class="form-control" min="0" step="1">
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col">
+                                    <label for="description">Description:</label>
+                                    <textarea name="description" id="description" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col">
+                                    <label for="link">Link:</label>
+                                    <input type="url" name="link" id="link" class="form-control">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Create Item</button>
+                        </form>
+                    {% endif %}
+                {% endif %}
                 <hr>
                 <!-- Loop through registry items and display them -->
                 {% for item in registry_items %}
