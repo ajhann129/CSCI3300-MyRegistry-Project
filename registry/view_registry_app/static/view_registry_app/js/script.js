@@ -14,13 +14,4 @@ document.addEventListener('DOMContentLoaded', function() {
         // Trigger form submission when the window loads
         document.getElementById('dashboardForm').submit();
     }
-
-    // Add event listener to the wishlist button
-    document.getElementById("wishlistButton").addEventListener("click", function() {
-        let wishlistURL = this.getAttribute("data-wishlist-url");
-        console.log("Wishlist URL:", wishlistURL); // Check if the URL is printed correctly
-        if (wishlistURL) {
-            window.location.href = wishlistURL;
-        }
-    });
 });
