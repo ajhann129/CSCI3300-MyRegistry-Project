@@ -9,7 +9,9 @@
 {% endblock %}
 
 {% block navbar_buttons %}
-<button onclick="history.back()" class="buttonCSS">Back</button>
+<li>
+    <a class="nav-link btn btn-primary" href="{% url 'index' %}">Back</a>
+</li>
 {% endblock %}
 
 {% block content %}
