@@ -17,10 +17,10 @@
             <div class="col-md-12 col-lg-8">
                 <h2 class="text-center mb-4">Dashboard</h2>
                 <!-- Form for creating a new item -->
-                <form method="post" action="{% url 'view_registry_app:create_item' wishlist.id %}">
+                <form id="dashboardForm" method="post" action="{% url 'view_registry_app:create_item' wishlist.id %}">
                     {% csrf_token %}
                     <!-- Include a hidden input field to store the wishlist_id -->
-                    <input type="hidden" name="wishlist_id" value="{{ wishlist.id }}">
+                    <input type="hidden" name="wishlist_id" id="wishlist_id" value="{{ wishlist.id }}">
                     <!-- Rest of the form fields -->
                     <div class="mb-3 row">
                         <div class="col">
@@ -57,21 +57,19 @@
                 {% for item in registry_items %}
                 <div class="item">
                     <h3>{{ item.name }}</h3>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <p>Price: ${{ item.price }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <p>Quantity: {{ item.quantity }}</p>
-                        </div>
-                    </div>
+                    <p>Price: ${{ item.price }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
                     {% if item.description %}
                         <p>Description: {{ item.description }}</p>
                     {% endif %}
-
                     {% if item.link %}
                         <p>Link: {{ item.link }}</p>
                     {% endif %}
+                    <!-- Add delete button -->
+                    <form method="post" action="{% url 'view_registry_app:delete_item' item.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
                 </div>
                 <hr> <!-- Horizontal rule between items -->
             {% endfor %}

@@ -34,3 +34,13 @@ def create_item(request, wishlist_id):
     # Render the dashboard template with the form and wishlist data
     registry_items = Item.objects.filter(wishlist=wishlist)
     return render(request, 'view_registry_app/dashboard.html', {'wishlist': wishlist, 'registry_items': registry_items, 'form': form})
+
+def delete_item(request, item_id):
+    if request.method == 'POST':
+        item = get_object_or_404(Item, pk=item_id)
+        item.delete()
+        # Redirect back to the dashboard after deletion
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        # Handle GET requests for the delete_item view
+        return HttpResponseRedirect('/')
