@@ -11,7 +11,10 @@ from .forms import WishlistForm
 # Create your views here.
     
 def wishlist_view(request):
-    return render(request, 'registry_app/wishlist.html')
+    if request.user.is_authenticated:
+        return render(request, 'registry_app/wishlist.html')
+    else:
+        return redirect('index')
 
 def create_wishlist(request):
     if request.method == 'POST':
