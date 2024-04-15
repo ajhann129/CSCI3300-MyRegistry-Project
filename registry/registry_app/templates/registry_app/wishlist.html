@@ -6,7 +6,6 @@
 
 {% block css %} 
 <link rel="stylesheet" href="{% static 'registry_app/css/wish_style.css' %}">
-<link rel="stylesheet" href="{% static 'registry_app/css/style.css' %}">
 {% endblock %}
 
 {% block navbar_buttons %}
@@ -15,38 +14,53 @@
 
 {% block content %}
 
-<h1>My Wishlists</h1>
+    <h1>My Wishlists</h1>
 
-<!-- Form to create a new wishlist -->
-<div id="createWishlistForm">
-    <form method="post" action="{% url 'registry_app:create_wishlist' %}">
-        {% csrf_token %}
-        <label for="wishlist_name"><b>Create New Wishlist:</b></label>
-        <input type="text" id="wishlist_name" name="wishlist_name" maxlength="45">
-        <button type="submit" id="createButton">Confirm</button>
-        <button type="reset">Cancel</button>
-        {% if messages %}
-            <ul class="errorlist">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    </form>
-</div>
+    <!-- Form to create a new wishlist -->
+    <div id="createWishlistForm">
+        <form method="post" action="{% url 'registry_app:create_wishlist' %}">
+            {% csrf_token %}
+            <label for="wishlist_name"><b>Create New Wishlist:</b></label>
+            <input type="text" id="wishlist_name" name="wishlist_name" maxlength="45">
+            <button type="submit" id="createButton">Confirm</button>
+            <button type="reset">Cancel</button>
+            {% if messages %}
+                <ul class="errorlist">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </form>
+    </div>
 
-<p id="maxWishlistMessage" style="color: red; display: none;">Max number of wishlists created (20)</p>
+    <p id="maxWishlistMessage" style="color: red; display: none;">Max number of wishlists created (20)</p>
 
-<hr> <!-- Horizontal rule -->
+    <hr> <!-- Horizontal rule -->
 
-<!-- Container for displaying wishlists -->
-<div id="wishlistContainer" class="wishlistGrid">
-    <!-- Wishlists will be dynamically added here -->
-</div>
+    <h3>My Wishlists</h3>
+    <!-- Container for displaying wishlists -->
+    <div id="wishlistContainer" class="wishlistGrid">
+        <!-- Wishlists will be dynamically added here -->
+    </div>
 
-<div id="wishlist-data" 
-     data-url="{% url 'registry_app:load_wishlists' %}">
-</div>
+    <br>
+    <br>
+    <hr>
+    <br>
 
-<script src="{% static 'registry_app/js/wish_script.js' %}"></script>
+    <h3>Other User's Wishlists</h3>
+    <!-- Container for displaying wishlists -->
+    <div id="otherWishlistContainer" class="wishlistGrid">
+        <!-- Wishlists will be dynamically added here -->
+    </div>
+
+    <div id="wishlist-data" 
+        data-url="{% url 'registry_app:load_wishlists' %}">
+    </div>
+    <div id="other-wishlist-data" 
+        data-url="{% url 'registry_app:load_other_wishlist' %}">
+    </div>
+
+    <script src="{% static 'registry_app/js/wish_script.js' %}"></script>
 {% endblock %}

@@ -58,6 +58,19 @@ def load_wishlists(request):
         # Handle invalid requests (e.g., POST requests)
         return JsonResponse({'error': 'Invalid request method'}, status=400)
     
+def load_other_wishlist(request):
+    if request.method == 'GET':
+        user = request.user
+        # Retrieve wishlists associated with the other users
+        wishlists = Wishlist.objects.exclude(user=user)
+        # Serialize wishlist data into JSON format
+        data = [{'id': wishlist.id, 'name': wishlist.name, 'user':wishlist.user.username.__str__()} for wishlist in wishlists]
+        # Return JSON response with wishlist data
+        return JsonResponse({'wishlists': data})
+    else:
+        # Handle invalid requests (e.g., POST requests)
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+    
 def sign_out(request):
     logout(request)
     return redirect('index')
