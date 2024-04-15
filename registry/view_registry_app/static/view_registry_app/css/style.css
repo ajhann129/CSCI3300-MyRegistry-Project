@@ -3,5 +3,48 @@
     border-radius: 15px;
     padding: 15px 25px;
     font-size: 24px;
+	position: relative;
 }
 
+.item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.item-header-left {
+    flex: 1;
+}
+
+.item-header-right {
+    flex: 1;
+    text-align: right;
+}
+
+.item-footer {
+    margin-top: 10px;
+}
+
+.delete-form {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.item-name {
+    word-wrap: break-word;
+}
+
+@media (min-width: 576px) {
+    .item-name {
+        word-break: break-word;
+        max-width: 100%;
+    }
+}
