@@ -9,7 +9,7 @@ body {
 .gradient-box {
     border: 2px solid block;
     padding: 20px;
-    background: linear-gradient(to bottom right, maroon, white);
+    background: linear-gradient(to bottom right, red, white);
     
 }
 @media print {

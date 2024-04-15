@@ -103,10 +103,12 @@
                             <p></p>
                         {% endif %}
                     </div>
-                    <form method="post" action="{% url 'view_registry_app:delete_item' item.id %}" class="delete-form">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>
+                    {% if wishlist.user == user %}
+                        <form method="post" action="{% url 'view_registry_app:delete_item' item.id %}" class="delete-form">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </div>
