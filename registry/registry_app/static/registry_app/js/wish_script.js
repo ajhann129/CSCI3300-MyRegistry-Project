@@ -17,13 +17,31 @@ document.addEventListener("DOMContentLoaded", function() {
         checkAndToggleMaxWishlistMessage();
     }
 
-    // Access the base URL from the data attribute
-    const wishlistUrl = document.getElementById('wishlist-data').getAttribute('data-url');
+    // Function to create a new wishlist box for the other users
+    function createOtherWishlistBox(name, id, user) {
+        let wishlistBox = document.createElement('div');
+        wishlistBox.className = 'wishlistBox';
+        wishlistBox.dataset.wishlistId = id; // Store wishlist ID as a data attribute
+        wishlistBox.innerHTML = `
+            <div class="boxOutline">
+                <h3>${user}'s ${name}</h3>
+                <div class="buttonContainer">
+                    <button class="viewButton" data-wishlist-id="${id}">View</button>
+                </div>
+            </div>
+        `;
+        document.getElementById('otherWishlistContainer').appendChild(wishlistBox);
+        checkAndToggleMaxWishlistMessage();
+    }
 
-    // Function to load wishlists from the database and display them on page load
+    // Access the load URLs from the data attribute
+    const loadUserWishlist = document.getElementById('wishlist-data').getAttribute('data-url');
+    const loadOtherUserWishlist = document.getElementById('other-wishlist-data').getAttribute('data-url');
+
+    // Function to load the current users wishlists from the database and display them on page load
     function loadWishlists() {
         // AJAX request to fetch wishlists for the signed-in user
-        fetch(wishlistUrl)
+        fetch(loadUserWishlist)
             .then(response => response.json())
             .then(data => {
                 data.wishlists.forEach(wishlist => {
@@ -37,6 +55,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Call loadWishlists function to display existing wishlists on page load
     loadWishlists();
+
+    // Function to load everyother user's wishlists from the database and display them on page load
+    function loadOtherWishlists() {
+        // AJAX request to fetch wishlists for the signed-in user
+        fetch(loadOtherUserWishlist)
+            .then(response => response.json())
+            .then(data => {
+                data.wishlists.forEach(wishlist => {
+                    createOtherWishlistBox(wishlist.name, wishlist.id, wishlist.user); // Call function to create wishlist box
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    loadOtherWishlists();
 
     // Event listener for clicking the delete button
     document.addEventListener("click", function(event) {

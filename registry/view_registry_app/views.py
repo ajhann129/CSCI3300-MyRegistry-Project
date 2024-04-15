@@ -10,14 +10,18 @@ from registry_app.models import Wishlist
 # Create your views here.
 
 def dashboard(request):
-    wishlist_id = request.POST.get('wishlist_id')
-    if wishlist_id is not None:
-        wishlist = get_object_or_404(Wishlist, pk=wishlist_id)
-        registry_items = Item.objects.filter(wishlist=wishlist)
-        form = ItemForm()
-        return render(request, 'view_registry_app/dashboard.html', {'wishlist': wishlist, 'registry_items': registry_items, 'form': form})
+    if request.user.is_authenticated:  # Check if user is authenticated
+        wishlist_id = request.POST.get('wishlist_id')
+        if wishlist_id is not None:
+            wishlist = get_object_or_404(Wishlist, pk=wishlist_id)
+            registry_items = Item.objects.filter(wishlist=wishlist)
+            form = ItemForm()
+            return render(request, 'view_registry_app/dashboard.html', {'wishlist': wishlist, 'registry_items': registry_items, 'form': form})
+        else:
+            return redirect('registry_app:wishlist')
     else:
-        return redirect('registry_app:wishlist')
+        return redirect('index')  # Redirect to the index page if user is not authenticated
+
 
 def create_item(request, wishlist_id):
     wishlist = get_object_or_404(Wishlist, pk=wishlist_id)

@@ -56,12 +56,12 @@ h3 {
     color: white;
 }
 .background-image {
-    background-image: url('/static/img/wishlistBG.png');
+    background-image: url('/static/img/background.jpg');
     background-size: cover;
     background-position: center;
 }
 body {
-    background-image: url('/static/img/wishlistBG.png');
+    background-image: url('/static/img/background.jpg');
 }
 .gradient-box {
     border: 2px solid block;
@@ -87,7 +87,7 @@ body {
     color: red; 
 }
 .myWishlistBG {
-    background-image: url('/static/img/wishlistBG.png');
+    background-image: url('/static/img/background.jpg');
     background-size: cover;
     background-position: center;
 }
