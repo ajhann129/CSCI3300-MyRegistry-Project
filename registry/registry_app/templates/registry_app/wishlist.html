@@ -36,9 +36,9 @@
 
     <p id="maxWishlistMessage" style="color: red; display: none;">Max number of wishlists created (20)</p>
 
-    <hr> <!-- Horizontal rule -->
+    <hr class="customHR">
 
-    <h3>My Wishlists</h3>
+    <h3 class="text-center">My Wishlists</h3>
     <!-- Container for displaying wishlists -->
     <div id="wishlistContainer" class="wishlistGrid">
         <!-- Wishlists will be dynamically added here -->
@@ -46,10 +46,10 @@
 
     <br>
     <br>
-    <hr>
+    <hr class="customHR">
     <br>
 
-    <h3>Other User's Wishlists</h3>
+    <h3 class="text-center">Other User's Wishlists</h3>
     <!-- Container for displaying wishlists -->
     <div id="otherWishlistContainer" class="wishlistGrid">
         <!-- Wishlists will be dynamically added here -->
@@ -61,6 +61,10 @@
     <div id="other-wishlist-data" 
         data-url="{% url 'registry_app:load_other_wishlist' %}">
     </div>
+
+    <br>
+    <hr class="customHR">
+    <br>
 
     <script src="{% static 'registry_app/js/wish_script.js' %}"></script>
 {% endblock %}
