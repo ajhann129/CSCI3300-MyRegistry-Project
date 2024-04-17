@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
+
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
-from django.contrib.auth import login
+
 from .forms import CreateAccountForm
 
 def index(request):
@@ -12,13 +12,10 @@ def create_account(request):
     if request.method == 'POST':
         form = CreateAccountForm(request.POST)
         if form.is_valid():
-            # This saves both User and UserProfile
-            user = form.save() 
-            # Log the user in after creating the account 
-            login(request, user)  
-            return redirect('registry_app:wishlist')  
+            user = form.save()
+            login(request, user)
+            return redirect('registry_app:wishlist')
     else:
-        # If the request method is not POST, create an empty CreateAccountForm instance
         form = CreateAccountForm()
 
     return render(request, 'account_app/create_account.html', {'form': form})
