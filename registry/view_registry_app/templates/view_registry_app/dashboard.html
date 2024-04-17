@@ -24,7 +24,6 @@
                         <button id="createItemButton" class="btn btn-primary btn-block mb-3 col-12" data-bs-toggle="modal" data-bs-target="#createItemModal">
                             Create Item
                         </button>
-                        <hr>
 
                         <!-- Modal -->
                         <div class="modal fade" id="createItemModal" tabindex="-1" aria-labelledby="createItemModalLabel" aria-hidden="true">
@@ -80,6 +79,15 @@
                         </div>
                     {% endif %}
                 {% endif %}
+
+                <hr>
+                <!-- Sorting information -->
+                <div class="text-center">
+                    <small class="text-muted">
+                        Sort items by clicking on the item name or the total price.
+                    </small>
+                </div>
+                <hr>
 
                 <!-- Loop through registry items and display them -->
                 {% for item in registry_items %}
