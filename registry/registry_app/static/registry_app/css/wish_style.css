@@ -4,12 +4,14 @@
 }
 
 .wishlistBox {
-    border: 1px solid #ccc;
+    border: 25px solid red;
+    border-radius: 20px;
     padding: 10px;
     text-align: center;
     word-wrap: break-word;
     max-width: 25ch;
     position: relative;
+    background-color: white;
 }
 
 .buttonContainer {
@@ -90,4 +92,7 @@ body {
     background-size: cover;
     background-position: center;
 }
-.createWishListButton:hover{background-color: blue;}
+.createWishListButton {
+    border: 5px solid black;
+    border-radius: 20px;
+}
