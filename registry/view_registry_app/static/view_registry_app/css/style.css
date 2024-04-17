@@ -48,3 +48,17 @@
         max-width: 100%;
     }
 }
+
+.sort-indicator-container {
+    position: relative;
+}
+
+.name-sort-indicator{
+    position: absolute;
+    left: -30px;
+}
+
+.price-sort-indicator{
+	position: absolute;
+	right: -30px;
+}

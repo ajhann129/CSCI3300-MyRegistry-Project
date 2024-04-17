@@ -83,34 +83,41 @@
 
                 <!-- Loop through registry items and display them -->
                 {% for item in registry_items %}
-                <div class="item">
-                    <div class="item-header">
-                        <div class="item-header-left">
-                            <h3 class="item-name">{{ item.name }}</h3>
-                            {% if item.description %}
-                                <p>{{ item.description }}</p>
-                            {% endif %}
-                        </div>
-                        <div class="item-header-right">
-                            <p>Price: ${{ item.price }}</p>
-                            <p>Quantity: {{ item.quantity }}</p>
-                        </div>
-                    </div>
-                    <div class="item-footer">
-                        {% if item.link %}
-                            <p>{{ item.link }}</p>
-                        {% else %}
-                            <p></p>
-                        {% endif %}
-                    </div>
-                    {% if wishlist.user == user %}
-                        <form method="post" action="{% url 'view_registry_app:delete_item' item.id %}" class="delete-form">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    {% endif %}
-                </div>
-                {% endfor %}
+					<div class="item" data-total="{{ item.total }}">
+						<div class="item-header">
+							<div class="item-header-left">
+								<div class="sort-indicator-container">
+									<span class="name-sort-indicator"></span>
+									<h3 class="item-name">{{ item.name }}</h3>
+								</div>
+								{% if item.description %}
+									<p>{{ item.description }}</p>
+								{% endif %}
+							</div>
+							<div class="item-header-right">
+								<p>Price: ${{ item.price }}</p>
+								<p>Quantity: {{ item.quantity }}</p>
+								<div class="sort-indicator-container">
+									<span class="price-sort-indicator"></span>
+									<p class="item-total">Total: ${{ item.total }}</p>
+								</div>
+							</div>
+						</div>
+						<div class="item-footer">
+							{% if item.link %}
+								<a href="{{ item.link }}" target="_blank">{{ item.link }}</a>
+							{% else %}
+								<p></p>
+							{% endif %}
+						</div>
+						{% if wishlist.user == user %}
+							<form method="post" action="{% url 'view_registry_app:delete_item' item.id %}" class="delete-form">
+								{% csrf_token %}
+								<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+							</form>
+						{% endif %}
+					</div>
+				{% endfor %}
             </div>
         </div>
     </div>
