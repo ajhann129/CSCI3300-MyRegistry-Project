@@ -19,36 +19,44 @@
 
 {% block content %}
     <div class="container mt-3">
-
         <div class="gradient-box mx-auto w-75">
-                <h1 class="display-3">Welcome to CoolRegistry.com</h1>
-                <p class="lead">Learn more about registries and take action:</p>
+            <h1 class="display-3">Welcome to CoolRegistry.com</h1>
+            <p class="lead">Learn more about registries and take action:</p>
         </div>
 
         <center>
             <h1 class="paddMe">Want to Make a Registry?</h1>
         </center>
 
-        <div class="boxMeIn mx-auto w-75">
-            <h2 class="refont">Create hundreds of entries using items from your favorite websites and stores:</h2>
-            <p class="Pformat">Insert advertisement photo or functionality screenshot</p>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="boxMeIn d-flex flex-column align-items-center">
+                    <h2 class="refont">Create hundreds of entries using items from your favorite websites and stores:</h2>
+                    <img src="{% static 'account_app/img/Made_Items.png' %}" alt="Already Bought" class="img-fluid">
+                </div>
+            </div>
         </div>
 
         <hr class="customHR">
 
-        <div class = "boxMeIn mx-auto w-75">
+        <div class="boxMeIn mx-auto w-75">
             <h2 class="refont">Better prepare for the important moments in your life</h2>
             <p class="Pformat">you can create themes for your registries: including baby showers, weddings, and more!</p>
-            <p>test. Insert advertisement or photos here</p>
+            <img src="{% static 'account_app/img/Registry_Showcase.png' %}" alt="Made Items" class="img-fluid">
         </div>
 
         <hr class="customHR">
 
-        <div class = "boxMeIn mx-auto w-75">
-            <h2 class="refont">coolregistry.com provides "Real Time" updates on your registry</h2>
-            <p class="Pformat">Using our service, see when gifts or other essential items have been purchased, no double gifting!</p>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="boxMeIn d-flex flex-column align-items-center">
+                    <h2 class="refont">coolregistry.com provides "Real Time" updates on your registry</h2>
+                    <p class="Pformat">Using our service, see when gifts or other essential items have been purchased, no double gifting!</p>
+                    <img src="{% static 'account_app/img/Already_Bought.png' %}" alt="Registry Showcase" class="img-fluid">
+                </div>
+            </div>
         </div>
-        
+
         <hr class="customHR">
     </div>
 {% endblock %}
