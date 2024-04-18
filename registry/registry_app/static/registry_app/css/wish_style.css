@@ -5,7 +5,8 @@
 
 .wishlistBox {
     background: whitesmoke;
-    border: 1px solid #ccc;
+    border: 2px solid red;
+    border-radius: 20px;
     padding: 10px;
     text-align: center;
     word-wrap: break-word;
@@ -91,11 +92,8 @@ body {
     background-size: cover;
     background-position: center;
 }
-.createWishListButton:hover{background-color: blue;}
 
-.buttonCSS {
-    background-color: pink;
-    border-radius: 15px;
-    padding: 15px 25px;
-    font-size: 24px;
+.createWishListButton {
+    border: 5px solid black;
+    border-radius: 20px;
 }

@@ -8,6 +8,7 @@ body {
 }
 .gradient-box {
     border: 2px solid block;
+    border-radius: 15px;
     padding: 20px;
     background: linear-gradient(to bottom right, red, white);
     
@@ -48,4 +49,18 @@ body {
 }
 .indexHeader {
     border: 5px solid blue;
+}
+
+.boxMeIn {
+    border:  2px solid black;
+    border-radius: 25px;
+    padding: 20px;
+    width: fit-content;
+    height: fit-content;
+}
+.paddMe {
+    padding: 20px
+}
+.nav-item {
+    color: white;
 }
