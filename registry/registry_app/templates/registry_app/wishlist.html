@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %} Wishlist Page {% endblock %}
+{% block title %} Registry Page {% endblock %}
 
 {% block css %} 
 <link rel="stylesheet" href="{% static 'registry_app/css/wish_style.css' %}">
@@ -14,13 +14,13 @@
 
 {% block content %}
 
-    <h1>My Wishlists</h1>
+    <h1>My Registries</h1>
 
     <!-- Form to create a new wishlist -->
     <div id="createWishlistForm">
         <form method="post" action="{% url 'registry_app:create_wishlist' %}">
             {% csrf_token %}
-            <label for="wishlist_name" id="createWishlistButton" class="createWishlistButton"><b>Create New Wishlist:</b></label>
+            <label for="wishlist_name" id="createWishlistButton" class="createWishlistButton"><b>Create New Registry:</b></label>
             <input type="text" id="wishlist_name" name="wishlist_name" maxlength="45">
             <button type="submit" id="createButton">Confirm</button>
             <button type="reset">Cancel</button>
@@ -38,7 +38,7 @@
 
     <hr class="customHR">
 
-    <h3 class="text-center">My Wishlists</h3>
+    <h3 class="text-center">My Registries</h3>
     <!-- Container for displaying wishlists -->
     <div id="wishlistContainer" class="wishlistGrid">
         <!-- Wishlists will be dynamically added here -->
@@ -49,7 +49,7 @@
     <hr class="customHR">
     <br>
 
-    <h3 class="text-center">Other User's Wishlists</h3>
+    <h3 class="text-center">Other User's Registries</h3>
     <!-- Container for displaying wishlists -->
     <div id="otherWishlistContainer" class="wishlistGrid">
         <!-- Wishlists will be dynamically added here -->
