@@ -13,6 +13,7 @@ class Item(models.Model):
     quantity = models.PositiveIntegerField()
     description = models.TextField(blank=True) # Optional description field
     link = models.URLField(blank=True)  # Optional link field
+    isPurchased = models.BooleanField(default=False)
 
     @property
     def total(self):

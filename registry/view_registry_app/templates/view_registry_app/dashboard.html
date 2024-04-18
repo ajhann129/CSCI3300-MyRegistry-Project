@@ -19,67 +19,67 @@
                 <h2 class="text-center mb-4">Dashboard</h2>
 
                 {% if user.is_authenticated %}
-                    {% if wishlist.user == user %}
-                        <!-- Button trigger modal -->
-                        <button id="createItemButton" class="btn btn-primary mb-3 px-4 py-2 d-block mx-auto" data-bs-toggle="modal" data-bs-target="#createItemModal">
-                            Create Item
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="createItemModal" tabindex="-1" aria-labelledby="createItemModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="createItemModalLabel">Create Item</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- Item creation form -->
-                                        <form id="dashboardForm" method="post" action="{% url 'view_registry_app:create_item' wishlist.id %}">
-                                            {% csrf_token %}
-                                            <!-- Include a hidden input field to store the wishlist_id -->
-                                            <input type="hidden" name="wishlist_id" id="wishlist_id" value="{{ wishlist.id }}">
-                                            <!-- Form fields -->
-                                            <div class="mb-3 row">
-                                                <div class="col">
-                                                    <label for="name">Name:</label>
-                                                    <input type="text" name="name" id="name" class="form-control" maxlength="50">
-                                                </div>
+                <div id="itemFormContainer" {% if wishlist.user != user %} style="display: none;" {% endif %}>
+                    <!-- Button trigger modal -->
+                    <button id="createItemButton" class="btn btn-primary mb-3 px-4 py-2 d-block mx-auto" data-bs-toggle="modal" data-bs-target="#createItemModal">
+                        Create Item
+                    </button>
+            
+                    <!-- Modal -->
+                    <div class="modal fade" id="createItemModal" tabindex="-1" aria-labelledby="createItemModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="createItemModalLabel">Create Item</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <!-- Item creation form -->
+                                    <form id="dashboardForm" method="post" action="{% url 'view_registry_app:create_item' wishlist.id %}">
+                                        {% csrf_token %}
+                                        <!-- Include a hidden input field to store the wishlist_id -->
+                                        <input type="hidden" name="wishlist_id" id="wishlist_id" value="{{ wishlist.id }}">
+                                        <!-- Form fields -->
+                                        <div class="mb-3 row">
+                                            <div class="col">
+                                                <label for="name">Name:</label>
+                                                <input type="text" name="name" id="name" class="form-control" maxlength="50">
                                             </div>
-                                            <div class="mb-3 row">
-                                                <div class="col">
-                                                    <label for="price">Price:</label>
-                                                    <input type="text" name="price" id="price" class="form-control" pattern="^\d{1,17}(\.\d{1,2})?$" title="Maximum 20 digits with up to 2 decimals">
-                                                </div>
-                                                <div class="col">
-                                                    <label for="quantity">Quantity:</label>
-                                                    <input type="text" name="quantity" id="quantity" class="form-control" pattern="^\d{1,20}$" title="Maximum 20 digits with no decimals">
-                                                </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <div class="col">
+                                                <label for="price">Price:</label>
+                                                <input type="text" name="price" id="price" class="form-control" pattern="^\d{1,17}(\.\d{1,2})?$" title="Maximum 20 digits with up to 2 decimals">
                                             </div>
-                                            <div class="mb-3 row">
-                                                <div class="col">
-                                                    <label for="description">Description:</label>
-                                                    <textarea name="description" id="description" class="form-control" maxlength="1000"></textarea>
-                                                </div>
+                                            <div class="col">
+                                                <label for="quantity">Quantity:</label>
+                                                <input type="text" name="quantity" id="quantity" class="form-control" pattern="^\d{1,20}$" title="Maximum 20 digits with no decimals">
                                             </div>
-                                            <div class="mb-3 row">
-                                                <div class="col">
-                                                    <label for="link">Link:</label>
-                                                    <input type="url" name="link" id="link" class="form-control">
-                                                </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <div class="col">
+                                                <label for="description">Description:</label>
+                                                <textarea name="description" id="description" class="form-control" maxlength="1000"></textarea>
                                             </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" form="dashboardForm" class="btn btn-primary">Create Item</button>
-                                    </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <div class="col">
+                                                <label for="link">Link:</label>
+                                                <input type="url" name="link" id="link" class="form-control">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" form="dashboardForm" class="btn btn-primary">Create Item</button>
                                 </div>
                             </div>
                         </div>
-                    {% endif %}
+                    </div>
+                </div>
                 {% endif %}
-
+            
                 <hr>
                 <!-- Sorting information -->
                 <div class="text-center">
@@ -91,41 +91,57 @@
 
                 <!-- Loop through registry items and display them -->
                 {% for item in registry_items %}
-					<div class="item" data-total="{{ item.total }}">
-						<div class="item-header">
-							<div class="item-header-left">
-								<div class="sort-indicator-container">
-									<span class="name-sort-indicator"></span>
-									<h3 class="item-name">{{ item.name }}</h3>
-								</div>
-								{% if item.description %}
-									<p>{{ item.description }}</p>
-								{% endif %}
-							</div>
-							<div class="item-header-right">
-								<p>Price: ${{ item.price }}</p>
-								<p>Quantity: {{ item.quantity }}</p>
-								<div class="sort-indicator-container">
-									<span class="price-sort-indicator"></span>
-									<p class="item-total">Total: ${{ item.total }}</p>
-								</div>
-							</div>
-						</div>
-						<div class="item-footer">
-							{% if item.link %}
-								<a href="{{ item.link }}" target="_blank">{{ item.link }}</a>
-							{% else %}
-								<p></p>
-							{% endif %}
-						</div>
-						{% if wishlist.user == user %}
-							<form method="post" action="{% url 'view_registry_app:delete_item' item.id %}" class="delete-form">
-								{% csrf_token %}
-								<button type="submit" class="btn btn-danger btn-sm">Delete</button>
-							</form>
-						{% endif %}
-					</div>
-				{% endfor %}
+                    <div class="item" data-total="{{ item.total }}">
+                        <div class="item-header">
+                            <div class="item-header-left">
+                                <div class="sort-indicator-container">
+                                    <span class="name-sort-indicator"></span>
+                                    <h3 class="item-name">{{ item.name }}</h3>
+                                </div>
+                                {% if item.description %}
+                                    <p>{{ item.description }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="item-header-right">
+                                <p>Price: ${{ item.price }}</p>
+                                <p>Quantity: {{ item.quantity }}</p>
+                                <div class="sort-indicator-container">
+                                    <span class="price-sort-indicator"></span>
+                                    <p class="item-total">Total: ${{ item.total }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-footer">
+                            {% if not item.isPurchased %}
+                                <form method="post" action="{% url 'view_registry_app:buy_item' item.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success btn-sm">Buy</button>
+                                </form>
+                            {% else %}
+                                {% if wishlist.user == user %}
+                                <form method="post" action="{% url 'view_registry_app:un_buy_item' item.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-warning btn-sm">Mark as Not Bought</button>
+                                </form>
+                                {% else %}
+                                    <button class="btn btn-secondary btn-sm" disabled>Already Bought</button>
+                                {% endif %}
+                            {% endif %}
+                            <br>
+                            {% if item.link %}
+                                <a href="{{ item.link }}" target="_blank">{{ item.link }}</a>
+                            {% else %}
+                                <p></p>
+                            {% endif %}
+                        </div>
+                        {% if wishlist.user == user %}
+                            <form method="post" action="{% url 'view_registry_app:delete_item' item.id %}" class="delete-form">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>

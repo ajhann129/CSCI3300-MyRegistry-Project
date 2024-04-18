@@ -51,6 +51,34 @@ def delete_item(request, item_id):
         # Handle GET requests for the delete_item view
         return HttpResponseRedirect('/')
     
+def buy_item(request, item_id):
+    if request.method == 'POST':
+        # Retrieve the item object
+        item = get_object_or_404(Item, pk=item_id)
+
+        # Update the isPurchased property to True
+        item.isPurchased = True
+        item.save()
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        # Handle GET requests for the buy_item view
+        return HttpResponseRedirect('/')
+    
+def un_buy_item(request, item_id):
+    if request.method == 'POST':
+        # Retrieve the item object
+        item = get_object_or_404(Item, pk=item_id)
+
+        # Update the isPurchased property to False
+        item.isPurchased = False
+        item.save()
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    else:
+        # Handle GET requests for the buy_item view
+        return HttpResponseRedirect('/')
+
 def sign_out(request):
     logout(request)
     return redirect('index')
